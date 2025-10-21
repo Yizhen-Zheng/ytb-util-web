@@ -1,0 +1,279 @@
+/* ==================== SIDEBAR CONTAINER ==================== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: #f7f6f3;
+  border-right: 1px solid #e9e7e3;
+  width: 240px;
+  min-width: 180px;
+  max-width: 480px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: none;
+}
+
+.sidebar.collapsed {
+  width: 0;
+  min-width: 0;
+}
+
+.sidebar.resizing {
+  transition: none;
+  user-select: none;
+}
+
+/* ==================== RESIZE HANDLE ==================== */
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.resize-handle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.resize-handle.active {
+  background-color: #0084ff;
+}
+
+/* ==================== SIDEBAR CONTENT ==================== */
+.sidebar-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ==================== USER SECTION ==================== */
+.user-section {
+  padding: 4px 12px;
+  margin-bottom: 8px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.user-profile:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #37352f;
+}
+
+/* ==================== SEARCH SECTION ==================== */
+.search-section {
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.search-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  color: #37352f;
+  opacity: 0.6;
+}
+
+.search-text {
+  font-size: 14px;
+  color: #37352f;
+}
+
+/* ==================== MENU ITEM ==================== */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  margin: 0 12px 2px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  color: #37352f;
+  opacity: 0.6;
+}
+
+.menu-text {
+  font-size: 14px;
+  color: #37352f;
+}
+
+/* ==================== DIVIDER ==================== */
+.divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.06);
+  margin: 8px 12px;
+}
+
+/* ==================== SECTION ==================== */
+.section {
+  margin-bottom: 8px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  margin: 0 12px 2px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.section-header:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.chevron-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  color: #37352f;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+
+.chevron-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(55, 53, 47, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-content {
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.section-content.collapsed {
+  max-height: 0;
+}
+
+/* ==================== PROJECT ITEM ==================== */
+.project-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px 4px 32px;
+  margin: 0 12px 2px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.project-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.project-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.project-name {
+  font-size: 14px;
+  color: #37352f;
+}
+
+/* ==================== BOTTOM SECTION ==================== */
+.bottom-section {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ==================== TOGGLE BUTTON ==================== */
+.toggle-btn {
+  position: fixed;
+  top: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border: 1px solid #e9e7e3;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  z-index: 1000;
+  left: calc(var(--sidebar-width, 240px) + 10px);
+}
+
+.toggle-btn:hover {
+  background-color: #f7f6f3;
+}
+
+.toggle-btn.collapsed {
+  left: 10px;
+}
+
+.toggle-icon {
+  width: 18px;
+  height: 18px;
+  color: #37352f;
+  opacity: 0.6;
+}

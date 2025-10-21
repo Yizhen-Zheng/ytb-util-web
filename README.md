@@ -1,0 +1,2 @@
+- [How to build Chrome extension](https://www.youtube.com/watch?v=0n809nd4Zu4)
+- [White board](https://reactflow.dev)
