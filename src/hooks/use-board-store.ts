@@ -1,21 +1,23 @@
 import { create } from "zustand";
-import type { BoardState, NodeT, EdgeT } from "@/lib/type";
+import { persist } from "zustand/middleware";
+import type { BoardState, ProjectMetadata, ProjectBoard } from "@/lib/type";
+import type { Node, Edge } from "@xyflow/react";
 import { boards } from "@/__tests__/mockup-data/mockup-data";
 
-const useBoardStore = create<BoardState>((set, get) => ({
-  boardTable: boards,
-  loadBoard: (projectId: string) => {
-    const board = get().boardTable[projectId] ?? { nodes: [], edges: [] };
-    return board;
-  },
-  upsertBoard: (projectId: string, nodes: NodeT[], edges: EdgeT[]) => {
-    set((state) => ({
-      boardTable: {
-        ...state.boardTable,
-        [projectId]: { nodes, edges },
-      },
-    }));
-  },
-}));
+const useBoardStore = create<BoardState>()(
+  persist(
+    (set, get) => ({
+      boards: {}, // TODO: load from 'DB'
+      getBoard: (projectId: string) => get().boards[projectId],
+      upsertBoard: (projectId: string, board: ProjectBoard) =>
+        set((s) => ({ boards: { ...s.boards, [projectId]: board } })),
+      upsertProject: (projectId: string, patch: Partial<ProjectBoard>) =>
+        set((s) => ({ boards: { ...s.boards, [projectId]: { ...s.boards[projectId], ...patch } } })),
+    }),
+    {
+      name: "board-store",
+    }
+  )
+);
 
 export { useBoardStore };

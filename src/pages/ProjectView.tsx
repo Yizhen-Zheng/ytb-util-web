@@ -15,25 +15,21 @@ import {
 } from "@xyflow/react";
 import type { NodeChange, EdgeChange, Connection, Node, Edge } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { nodeTypes } from "@/lib/consts";
+import { getProjectById } from "@/lib/db/project";
+import { getGraphNodeRowsByProjectId } from "@/lib/db/node";
+import { dbRowToVideoNode } from "@/lib/parse/node";
+import type { ProjectMetadata, GraphNodeRow } from "@/lib/type";
 
-//mockup query function
-const queryProjectById = (projectId: string) => {
-  return projects.find((project) => project.id === projectId);
-};
-
-export default function ProjectView() {
+export default async function ProjectView() {
   const { projectId = "" } = useParams();
-  const project = queryProjectById(projectId) ?? { id: "", title: "" };
-  //   const { nodes, edges } = useBoardStore().loadBoard(projectId);
-
-  const initialNodes: Node[] = [
-    { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
-    { id: "n2", position: { x: 0, y: 100 }, data: { label: "Node 2" } },
-  ];
-
-  const initialEdges: Edge[] = [{ id: "n1-n2", source: "n1", target: "n2" }];
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+  const project: ProjectMetadata | undefined = await getProjectById(projectId);
+  if (!project) {
+    return <div>Project not found</div>;
+  }
+  const nodeRows: GraphNodeRow[] = await getGraphNodeRowsByProjectId(projectId);
+  const initialNodes: Node[] = nodeRows.map((nodeRow) => dbRowToVideoNode(nodeRow));
+  // const { nodes, edges } = useBoardStore().loadBoard(projectId);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
@@ -55,13 +51,14 @@ export default function ProjectView() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        // nodeTypes={}for later use
+        nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         fitView
       >
         <Background />
+        <MiniMap />
         <Controls />
       </ReactFlow>
     </div>
