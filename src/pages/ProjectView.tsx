@@ -1,6 +1,6 @@
 import { projects } from "@/__tests__/mockup-data/mockup-data";
 import { Outlet, useParams, useLocation, Link } from "react-router";
-import useBoardStore from "@/hooks/use-board-store";
+import { useBoardStore } from "@/hooks/use-board-store";
 import React, { useCallback, useRef, useState } from "react";
 import {
   ReactFlow,
@@ -13,7 +13,7 @@ import {
   applyNodeChanges,
   applyEdgeChanges,
 } from "@xyflow/react";
-import type { NodeChange, EdgeChange } from "@xyflow/react";
+import type { NodeChange, EdgeChange, Connection, Node, Edge } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 //mockup query function
@@ -26,23 +26,27 @@ export default function ProjectView() {
   const project = queryProjectById(projectId) ?? { id: "", title: "" };
   //   const { nodes, edges } = useBoardStore().loadBoard(projectId);
 
-  const initialNodes = [
+  const initialNodes: Node[] = [
     { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
     { id: "n2", position: { x: 0, y: 100 }, data: { label: "Node 2" } },
   ];
-  const initialEdges = [{ id: "n1-n2", source: "n1", target: "n2" }];
+
+  const initialEdges: Edge[] = [{ id: "n1-n2", source: "n1", target: "n2" }];
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    (changes: NodeChange[]) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
     []
   );
   const onEdgesChange = useCallback(
-    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    (changes: EdgeChange[]) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     []
   );
-  const onConnect = useCallback((params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)), []);
+  const onConnect = useCallback(
+    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    []
+  );
   return (
     <div className="relative h-full w-full">
       <h1>Project: {project.title}</h1>
@@ -51,11 +55,15 @@ export default function ProjectView() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        // nodeTypes={}for later use
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         fitView
-      ></ReactFlow>
+      >
+        <Background />
+        <Controls />
+      </ReactFlow>
     </div>
   );
 }
