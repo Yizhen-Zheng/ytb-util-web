@@ -1,10 +1,34 @@
+import React from "react";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "@/styles/index.css";
-import App from "@/components/App.tsx";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import AppLayout from "@/AppLayout";
+import Dashboard from "@/pages/Dashboard";
+import ProjectView from "@/pages/ProjectView";
+import NodeInfoModal from "@/pages/NodeInfoModal";
 
-createRoot(document.getElementById("root")!).render(
+import "@/styles/index.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: AppLayout,
+    children: [
+      {
+        index: true,
+        Component: Dashboard,
+      },
+      {
+        path: "project/:projectId",
+        Component: ProjectView,
+        children: [{ path: "nodes/:nodeId", Component: NodeInfoModal }],
+      },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>
 );

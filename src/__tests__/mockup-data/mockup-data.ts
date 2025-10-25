@@ -1,4 +1,4 @@
-import type { SectionItem, Project } from "../../src/lib/type";
+import type { SectionItem, Project, NodeT, EdgeT } from "@/lib/type";
 
 const sections: SectionItem[] = [
   {
@@ -26,6 +26,7 @@ const sections: SectionItem[] = [
 
 const projects: Project[] = [
   {
+    id: "1",
     title: "Network Security",
     thumbnail: "https://placehold.co/240x140",
     href: "#",
@@ -33,6 +34,7 @@ const projects: Project[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
+    id: "2",
     title: "Database Optimization",
     thumbnail: "https://placehold.co/240x140/eee/333?text=Thumbnail",
     href: "#",
@@ -41,4 +43,20 @@ const projects: Project[] = [
   },
 ];
 
-export { sections, projects };
+const boards: Record<string, { nodes: NodeT[]; edges: EdgeT[] }> = {
+  "1": {
+    nodes: [
+      { id: "node1", label: "node1", x: 160, y: 120 },
+      { id: "node2", label: "node2", x: 220, y: 320 },
+    ],
+    edges: [{ id: "edge1", source: "node1", target: "node2" }],
+  },
+  "2": {
+    nodes: [
+      { id: "node1", label: "node1", x: 160, y: 120 },
+      { id: "node2", label: "node2", x: 220, y: 320 },
+    ],
+    edges: [{ id: "edge1", source: "node1", target: "node2" }],
+  },
+};
+export { sections, projects, boards };
