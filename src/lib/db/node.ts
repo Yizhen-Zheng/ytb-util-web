@@ -1,5 +1,5 @@
-import { videoContentMetadatas, graphNodeRows } from "@/__tests__/mockup-data/mockup-data";
-import type { VideoContentMetadata, GraphNodeRow } from "@/lib/type";
+import { videoContentMetadatas, videoNodeMetadatas } from "@/__tests__/mockup-data/mockup-data";
+import type { VideoContentMetadata, VideoNodeMetadata } from "@/lib/type";
 
 // implement query
 const getVideoContentMetadataByProjectId = async (projectId: string): Promise<VideoContentMetadata[]> => {
@@ -8,10 +8,10 @@ const getVideoContentMetadataByProjectId = async (projectId: string): Promise<Vi
   return vcm;
 };
 
-const getGraphNodeRowsByProjectId = async (projectId: string): Promise<GraphNodeRow[]> => {
-  const gnr = graphNodeRows.filter((gnr) => gnr.projectMetadataId === projectId);
+const getVideoNodeMetadatasByProjectId = async (projectId: string): Promise<VideoNodeMetadata[]> => {
+  const vnm = videoNodeMetadatas.filter((vnm) => vnm.projectMetadataId === projectId);
   // parse
-  return gnr;
+  return vnm;
 };
 
-export { getVideoContentMetadataByProjectId, getGraphNodeRowsByProjectId };
+export { getVideoContentMetadataByProjectId, getVideoNodeMetadatasByProjectId };

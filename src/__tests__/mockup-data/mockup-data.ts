@@ -2,10 +2,9 @@ import type {
   SectionItem,
   ProjectBoard,
   ProjectMetadata,
-  VideoNodeT,
-  VideoNodeData,
   VideoContentMetadata,
-  GraphNodeRow,
+  VideoNodeMetadata,
+  EdgeMetadata,
 } from "@/lib/type";
 import type { Node, Edge, XYPosition, NodeProps } from "@xyflow/react";
 
@@ -49,57 +48,63 @@ const projects: ProjectMetadata[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ];
+const videoContentMetadatas: VideoContentMetadata[] = [
+  // project_1
 
-const videoContentMetadatas: VideoContentMetadata[][] = [
-  [
-    {
-      id: "vid_1",
-      video_url: "https://www.youtube.com/watch?v=aircAruvnKk",
-      timestamps: ["00:00 Intro", "02:45 What is a Neural Network?", "07:20 Backpropagation"],
-      thumbnail: "https://img.youtube.com/vi/aircAruvnKk/hqdefault.jpg",
-      title: "Neural Networks Demystified - Part 1",
-      description: "A visual introduction to neural networks and how they learn.",
-    },
-    {
-      id: "vid_2",
-      video_url: "https://www.youtube.com/watch?v=7eh4d6sabA0",
-      timestamps: ["00:00 Intro", "01:30 Setting up Python", "05:00 Training Model"],
-      thumbnail: "https://img.youtube.com/vi/7eh4d6sabA0/hqdefault.jpg",
-      title: "Machine Learning for Beginners - Full Course",
-      description: "FreeCodeCamp crash course to start learning ML in Python.",
-    },
-  ],
-  [
-    {
-      id: "vid_3",
-      video_url: "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
-      timestamps: ["00:00 Why Learn React?", "04:15 Components", "11:00 Props & State"],
-      thumbnail: "https://img.youtube.com/vi/LHBE6Q9XlzI/hqdefault.jpg",
-      title: "React Explained in 100 Seconds",
-      description: "A concise visual explanation of React fundamentals.",
-    },
-    {
-      id: "vid_4",
-      video_url: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
-      timestamps: ["00:00 Setup", "03:20 JSX", "10:45 Hooks"],
-      thumbnail: "https://img.youtube.com/vi/Ke90Tje7VS0/hqdefault.jpg",
-      title: "React JS Crash Course",
-      description: "Traversy Media crash course for React beginners.",
-    },
-    {
-      id: "vid_5",
-      video_url: "https://www.youtube.com/watch?v=rfscVS0vtbw",
-      timestamps: ["00:00 Intro", "03:00 Variables", "12:15 Functions"],
-      thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/hqdefault.jpg",
-      title: "Learn Python in One Video",
-      description: "Quick overview of Python basics for complete beginners.",
-    },
-  ],
+  {
+    id: "vid_1",
+    projectMetadataId: "project_1",
+    video_url: "https://www.youtube.com/watch?v=aircAruvnKk",
+    timestamps: ["00:00 Intro", "02:45 What is a Neural Network?", "07:20 Backpropagation"],
+    thumbnail: "https://img.youtube.com/vi/aircAruvnKk/hqdefault.jpg",
+    title: "Neural Networks Demystified - Part 1",
+    description: "A visual introduction to neural networks and how they learn.",
+  },
+  {
+    id: "vid_2",
+    projectMetadataId: "project_1",
+    video_url: "https://www.youtube.com/watch?v=7eh4d6sabA0",
+    timestamps: ["00:00 Intro", "01:30 Setting up Python", "05:00 Training Model"],
+    thumbnail: "https://img.youtube.com/vi/7eh4d6sabA0/hqdefault.jpg",
+    title: "Machine Learning for Beginners - Full Course",
+    description: "FreeCodeCamp crash course to start learning ML in Python.",
+  },
+
+  // project_2
+
+  {
+    id: "vid_3",
+    projectMetadataId: "project_2",
+    video_url: "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+    timestamps: ["00:00 Why Learn React?", "04:15 Components", "11:00 Props & State"],
+    thumbnail: "https://img.youtube.com/vi/LHBE6Q9XlzI/hqdefault.jpg",
+    title: "React Explained in 100 Seconds",
+    description: "A concise visual explanation of React fundamentals.",
+  },
+  {
+    id: "vid_4",
+    projectMetadataId: "project_2",
+    video_url: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+    timestamps: ["00:00 Setup", "03:20 JSX", "10:45 Hooks"],
+    thumbnail: "https://img.youtube.com/vi/Ke90Tje7VS0/hqdefault.jpg",
+    title: "React JS Crash Course",
+    description: "Traversy Media crash course for React beginners.",
+  },
+  {
+    id: "vid_5",
+    projectMetadataId: "project_2",
+    video_url: "https://www.youtube.com/watch?v=rfscVS0vtbw",
+    timestamps: ["00:00 Intro", "03:00 Variables", "12:15 Functions"],
+    thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/hqdefault.jpg",
+    title: "Learn Python in One Video",
+    description: "Quick overview of Python basics for complete beginners.",
+  },
 ];
 
-const graphNodeRows: GraphNodeRow[] = [
+const videoNodeMetadatas: VideoNodeMetadata[] = [
+  // project_1
   {
-    projectMetadataId: "proj_youtube_ai",
+    projectMetadataId: "project_1",
     videoContentMetadataId: "vid_1",
     type: "videoNode",
     color: "#FF9F43",
@@ -109,7 +114,7 @@ const graphNodeRows: GraphNodeRow[] = [
     height: 140,
   },
   {
-    projectMetadataId: "proj_youtube_ai",
+    projectMetadataId: "project_1",
     videoContentMetadataId: "vid_2",
     type: "videoNode",
     color: "#54A0FF",
@@ -118,8 +123,31 @@ const graphNodeRows: GraphNodeRow[] = [
     width: 250,
     height: 140,
   },
+
+  // project_2
+
   {
-    projectMetadataId: "proj_youtube_ai",
+    projectMetadataId: "project_2",
+    videoContentMetadataId: "vid_3",
+    type: "videoNode",
+    color: "#10AC84",
+    x: 120,
+    y: 400,
+    width: 250,
+    height: 140,
+  },
+  {
+    projectMetadataId: "project_2",
+    videoContentMetadataId: "vid_4",
+    type: "videoNode",
+    color: "#F368E0",
+    x: 420,
+    y: 460,
+    width: 250,
+    height: 140,
+  },
+  {
+    projectMetadataId: "project_2",
     videoContentMetadataId: "vid_5",
     type: "videoNode",
     color: "#5F27CD",
@@ -129,17 +157,21 @@ const graphNodeRows: GraphNodeRow[] = [
     height: 140,
   },
 ];
-// const videoNodes: VideoNodeT[] = [];
+
+const edgeMetadatas: EdgeMetadata[] = [
+  // project_1
+  { id: "project_1_edge1", projectMetadataId: "project_1", source: "vid_1", target: "vid_2" },
+  // project_2
+  { id: "project_2_edge1", projectMetadataId: "project_2", source: "vid_3", target: "vid_4" },
+  { id: "project_2_edge2", projectMetadataId: "project_2", source: "vid_3", target: "vid_5" },
+];
 
 const boards: Record<ProjectMetadata["id"], ProjectBoard> = {
-  "pid-1": {
-    nodes: [
-      { id: "node1", position: { x: 160, y: 120 } as XYPosition, data: { label: "node1" } },
-      { id: "node2", position: { x: 220, y: 320 } as XYPosition, data: { label: "node2" } },
-    ],
+  project_1: {
+    nodes: [],
     edges: [{ id: "edge1", source: "node1", target: "node2" }],
   },
-  "pid-2": {
+  project_2: {
     nodes: [
       { id: "node1", position: { x: 160, y: 120 } as XYPosition, data: { label: "node1" } },
       { id: "node2", position: { x: 220, y: 320 } as XYPosition, data: { label: "node2" } },
@@ -147,4 +179,4 @@ const boards: Record<ProjectMetadata["id"], ProjectBoard> = {
     edges: [{ id: "edge1", source: "node1", target: "node2" }],
   },
 };
-export { sections, projects, boards };
+export { sections, projects, boards, videoNodeMetadatas, videoContentMetadatas, edgeMetadatas };

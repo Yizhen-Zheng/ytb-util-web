@@ -1,17 +1,15 @@
-import type { GraphNodeRow, VideoContentMetadata, VideoNodeData, VideoNodeT } from "@/lib/type";
-import type { XYPosition } from "@xyflow/react";
+import type { VideoNodeMetadata, ProjectBoard, VideoContentMetadata } from "@/lib/type";
+import type { XYPosition, Node } from "@xyflow/react";
 
-const dbRowToVideoNode = (row: GraphNodeRow): VideoNodeT => {
-  const vd: VideoNodeData = {
-    videoContentMetadataId: row.videoContentMetadataId,
-  };
+const videoNodeMetadataToVideoNode = (row: VideoNodeMetadata): Node => {
   const vn = {
     id: row.videoContentMetadataId,
     type: row.type,
     position: { x: row.x, y: row.y } as XYPosition,
-    data: vd,
+    data: { videoContentMetadataId: row.videoContentMetadataId },
   };
   return vn;
 };
 
-export { dbRowToVideoNode };
+// }
+export { videoNodeMetadataToVideoNode };
