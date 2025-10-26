@@ -1,0 +1,7 @@
+{
+  "manifest_version": 3,
+  "name": "Youtube Experience Enhance",
+  "version": "1.0",
+  "description": "A Youtube extension for better E-learning experience",
+  "permissions": ["tabs", "activeTab"]
+}

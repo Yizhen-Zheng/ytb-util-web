@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import AppLayout from "@/AppLayout";
 import Dashboard from "@/pages/Dashboard";
-import ProjectView from "@/pages/ProjectView";
+import ProjectView from "./pages/ProjectView";
 import NodeInfoModal from "@/pages/NodeInfoModal";
 
 import "@/styles/index.css";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "project/:projectId",
         Component: ProjectView,
-        children: [{ path: "nodes/:nodeId", Component: NodeInfoModal }],
+        children: [{ path: ":nodeId", Component: NodeInfoModal }],
       },
     ],
   },

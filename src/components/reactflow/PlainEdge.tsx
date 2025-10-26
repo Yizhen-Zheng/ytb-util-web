@@ -4,7 +4,7 @@ import type { EdgeMetadata } from "@/lib/type";
 
 export type PlainEdge = Edge<{ edgeMetadata: EdgeMetadata }>;
 
-const CustomEdge = (props: EdgeProps<PlainEdge>) => {
+const PlainEdge = (props: EdgeProps<PlainEdge>) => {
   const { sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } = props;
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -17,7 +17,7 @@ const CustomEdge = (props: EdgeProps<PlainEdge>) => {
   const onEdgeClick = () => {
     console.log("edge clicked");
   };
-  console.log();
+  console.log(props);
   return (
     <>
       <BaseEdge path={edgePath} onClick={onEdgeClick} />
@@ -28,4 +28,4 @@ const CustomEdge = (props: EdgeProps<PlainEdge>) => {
   );
 };
 
-export default CustomEdge;
+export default PlainEdge;

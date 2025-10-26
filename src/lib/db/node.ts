@@ -2,16 +2,23 @@ import { videoContentMetadatas, videoNodeMetadatas } from "@/__tests__/mockup-da
 import type { VideoContentMetadata, VideoNodeMetadata } from "@/lib/type";
 
 // implement query
-const getVideoContentMetadataByProjectId = async (projectId: string): Promise<VideoContentMetadata[]> => {
-  const vcm = videoContentMetadatas.filter((vcm) => vcm.projectMetadataId === projectId);
+const getVideoContentMetadatasByProjectId = async (projectId: string): Promise<VideoContentMetadata[]> => {
+  const vcms = videoContentMetadatas.filter((vcm) => vcm.projectMetadataId === projectId);
   // parse
-  return vcm;
+  return vcms;
 };
 
 const getVideoNodeMetadatasByProjectId = async (projectId: string): Promise<VideoNodeMetadata[]> => {
-  const vnm = videoNodeMetadatas.filter((vnm) => vnm.projectMetadataId === projectId);
+  const vnms = videoNodeMetadatas.filter((vnm) => vnm.projectMetadataId === projectId);
   // parse
-  return vnm;
+  return vnms;
 };
 
-export { getVideoContentMetadataByProjectId, getVideoNodeMetadatasByProjectId };
+const getVideoContentMetadataById = async (
+  videoContentMetadataId: string
+): Promise<VideoContentMetadata | undefined> => {
+  const vcm = videoContentMetadatas.find((vcm) => vcm.id === videoContentMetadataId);
+  // parse
+  return vcm;
+};
+export { getVideoContentMetadatasByProjectId, getVideoNodeMetadatasByProjectId, getVideoContentMetadataById };
