@@ -12,6 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { getAllProjectsOfUser, getSectionShortcuts } from "@/lib/db/project";
 import { sidebarHeader, sidebarContent, sidebarFooter } from "@/lib/sidebar-content";
@@ -73,15 +74,16 @@ export default function AppSidebar() {
         icon: item.icon,
         label: item.name,
       })),
-    [favoriteShortcuts],
+    [favoriteShortcuts]
   );
 
   return (
     <Sidebar collapsible="icon" variant="sidebar">
       <SidebarHeader>
         <SidebarMenu>
-          {/* TODO: popup when user is clicked */}
-          <userInfo.elem />
+          {sidebarHeader.map((item) => (
+            <item.elem key={item.text} />
+          ))}
         </SidebarMenu>
       </SidebarHeader>
 

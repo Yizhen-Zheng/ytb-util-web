@@ -39,6 +39,7 @@ type VideoContentMetadata = {
 // Node info in DB
 // All Info for rendering a Video Node(appearance)
 type VideoNodeMetadata = {
+  id: string;
   projectMetadataId: string;
   videoContentMetadataId: VideoContentMetadata["id"];
   type: "videoNode";
@@ -55,11 +56,19 @@ type EdgeMetadata = {
   id: string;
   type: "plainEdge";
   projectMetadataId: ProjectMetadata["id"];
-  source: VideoContentMetadata["id"];
-  target: VideoContentMetadata["id"];
+  source: NodeHandleMetadata["id"];
+  target: NodeHandleMetadata["id"];
 };
 
-// State
+type NodeHandleMetadata = {
+  id: string;
+  type: "source" | "target";
+  position: "Left" | "Right" | "Top" | "Bottom";
+  projectMetadataId: ProjectMetadata["id"];
+  videoNodeMetadataId: VideoNodeMetadata["id"];
+};
+
+// State(currently not using)
 type BoardState = {
   boards: Record<ProjectMetadata["id"], ProjectBoard>;
   getBoard: (projectId: ProjectMetadata["id"]) => ProjectBoard | undefined;
@@ -77,4 +86,5 @@ export type {
   VideoContentMetadata,
   VideoNodeMetadata,
   EdgeMetadata,
+  NodeHandleMetadata,
 };

@@ -4,8 +4,10 @@ import type { Edge } from "@xyflow/react";
 const edgeMetadataToEdge = (row: EdgeMetadata): Edge => {
   return {
     id: row.id,
-    source: row.source,
-    target: row.target,
+    source: row.sourceNodeId,
+    target: row.targetNodeId,
+    type: row.type,
+    data: { metadata: row },
   };
 };
 

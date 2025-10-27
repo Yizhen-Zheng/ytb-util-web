@@ -104,66 +104,57 @@ const videoContentMetadatas: VideoContentMetadata[] = [
 const videoNodeMetadatas: VideoNodeMetadata[] = [
   // project_1
   {
+    id: "node1",
     projectMetadataId: "project_1",
     videoContentMetadataId: "vid_1",
     type: "videoNode",
-    color: "#FF9F43",
     x: 100,
     y: 100,
-    width: 250,
-    height: 140,
   },
+
   {
+    id: "node2",
     projectMetadataId: "project_1",
     videoContentMetadataId: "vid_2",
     type: "videoNode",
-    color: "#54A0FF",
     x: 400,
     y: 180,
-    width: 250,
-    height: 140,
   },
 
   // project_2
 
   {
+    id: "node3",
     projectMetadataId: "project_2",
     videoContentMetadataId: "vid_3",
     type: "videoNode",
-    color: "#10AC84",
     x: 120,
     y: 400,
-    width: 250,
-    height: 140,
   },
   {
+    id: "node4",
     projectMetadataId: "project_2",
     videoContentMetadataId: "vid_4",
     type: "videoNode",
-    color: "#F368E0",
     x: 420,
     y: 460,
-    width: 250,
-    height: 140,
   },
   {
+    id: "node5",
     projectMetadataId: "project_2",
     videoContentMetadataId: "vid_5",
     type: "videoNode",
-    color: "#5F27CD",
     x: 700,
     y: 120,
-    width: 250,
-    height: 140,
   },
 ];
 
 const edgeMetadatas: EdgeMetadata[] = [
   // project_1
-  { id: "project_1_edge1", projectMetadataId: "project_1", source: "vid_1", target: "vid_2", type: "plainEdge" },
+  { id: "edge1", projectMetadataId: "project_1", sourceNodeId: "node1", targetNodeId: "node2", type: "plainEdge" },
   // project_2
-  { id: "project_2_edge1", projectMetadataId: "project_2", source: "vid_3", target: "vid_4", type: "plainEdge" },
-  { id: "project_2_edge2", projectMetadataId: "project_2", source: "vid_3", target: "vid_5", type: "plainEdge" },
+  { id: "edge2", projectMetadataId: "project_2", sourceNodeId: "node2", targetNodeId: "vid_4", type: "plainEdge" },
+  { id: "edge3", projectMetadataId: "project_2", sourceNodeId: "node3", targetNodeId: "vid_5", type: "plainEdge" },
 ];
 
 const boards: Record<ProjectMetadata["id"], ProjectBoard> = {

@@ -1,17 +1,7 @@
 import { Outlet, useParams, useLocation, Link } from "react-router";
 import { useBoardStore } from "@/hooks/use-board-store";
-import React, { useCallback, useRef, useState, useEffect } from "react";
-import {
-  ReactFlow,
-  addEdge,
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  applyNodeChanges,
-  applyEdgeChanges,
-} from "@xyflow/react";
+import React, { useCallback, useRef, useState, useEffect, use } from "react";
+import { ReactFlow, addEdge, MiniMap, Controls, Background, useNodesState, useEdgesState } from "@xyflow/react";
 import type { NodeChange, EdgeChange, Connection, Node, Edge } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { nodeTypes, edgeTypes } from "@/lib/consts";
@@ -24,9 +14,10 @@ import type { ProjectMetadata, VideoNodeMetadata } from "@/lib/type";
 
 export default function ProjectView() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const { projectId } = useParams(); //find current project
   const [project, setProject] = useState<ProjectMetadata>();
-  const [error, setError] = useState<string | null>(null);
 
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
@@ -77,11 +68,15 @@ export default function ProjectView() {
     fetchData();
   }, [projectId, setNodes, setEdges]);
 
+  useEffect(() => {
+    console.log("edges", edges);
+  }, [edges]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error || !project) {
+  if (error || !project || !nodes || !edges) {
     return <div>Error: {error}</div>;
   }
 

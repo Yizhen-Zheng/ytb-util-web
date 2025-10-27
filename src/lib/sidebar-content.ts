@@ -4,8 +4,12 @@ import UserBtn from "@/components/buttons/sidebar/UserBtn";
 import SettingsBtn from "@/components/buttons/sidebar/SettingsBtn";
 import HelpBtn from "@/components/buttons/sidebar/HelpBtn";
 import TrashBtn from "@/components/buttons/sidebar/TrashBtn";
-
+import { SidebarTrigger } from "@/components/ui/sidebar";
 const sidebarHeader = [
+  {
+    text: "SidebarTrigger",
+    elem: SidebarTrigger,
+  },
   {
     text: "User",
     elem: UserBtn,
