@@ -13,7 +13,6 @@ import { getVideoContentMetadataById } from "@/lib/db/node";
 import type { VideoContentMetadata } from "@/lib/type";
 
 export type VideoNode = Node<{ videoContentMetadataId: string }, "videoNode">;
-// TODO: get cached project state from zustand
 
 const VideoNode = (props: NodeProps<VideoNode>) => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +21,7 @@ const VideoNode = (props: NodeProps<VideoNode>) => {
   const location = useLocation();
   const { videoContentMetadataId } = props.data;
   const [videoContentMetadata, setVideoContentMetadata] = useState<VideoContentMetadata>();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,28 +37,45 @@ const VideoNode = (props: NodeProps<VideoNode>) => {
       }
     };
     fetchData();
-  });
+  }, [videoContentMetadataId]); // Added dependency array
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <BaseNode className="w-[320px]">
+        <div className="p-4">Loading...</div>
+      </BaseNode>
+    );
   }
 
   if (error || !videoContentMetadata) {
-    return <div>Error: {error}</div>;
+    return (
+      <BaseNode className="w-[320px]">
+        <div className="p-4">Error: {error}</div>
+      </BaseNode>
+    );
   }
-  return (
-    <BaseNode className="">
-      <Link to={`${videoContentMetadataId}`} state={{ from: location }} className="w-autp h-auto">
-        <BaseNodeHeader>
-          <BaseNodeHeaderTitle>videoContentMetadata.title</BaseNodeHeaderTitle>
-        </BaseNodeHeader>
 
-        <BaseNodeContent>
-          <AspectRatio ratio={16 / 9}>
-            <img src={videoContentMetadata.thumbnail} alt="" />
+  return (
+    <BaseNode className="w-[320px]">
+      <Link to={`${videoContentMetadataId}`} state={{ from: location }} className="block">
+        <BaseNodeContent className="p-0">
+          <AspectRatio ratio={16 / 9} className="bg-muted overflow-hidden rounded-t-lg">
+            <img
+              src={videoContentMetadata.thumbnail}
+              alt={videoContentMetadata.title}
+              className="w-full h-full object-cover"
+            />
           </AspectRatio>
         </BaseNodeContent>
+
+        <BaseNodeHeader className="p-3">
+          <BaseNodeHeaderTitle className="text-sm font-medium line-clamp-2">
+            {videoContentMetadata.title}
+          </BaseNodeHeaderTitle>
+        </BaseNodeHeader>
       </Link>
     </BaseNode>
   );
 };
+
 export default VideoNode;

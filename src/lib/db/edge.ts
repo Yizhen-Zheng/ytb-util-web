@@ -4,8 +4,6 @@ import type { EdgeMetadata } from "@/lib/type";
 const getEdgeMetadatasByProjectId = async (projectId: string): Promise<EdgeMetadata[]> => {
   const em = edgeMetadatas.filter((em) => em.projectMetadataId === projectId);
   // parse
-  console.log(em);
-  console.log(projectId);
   return em;
 };
 export { getEdgeMetadatasByProjectId };

@@ -1,4 +1,4 @@
-import { type Node, type Edge, type NodeProps } from "@xyflow/react";
+import { type Node, type Edge } from "@xyflow/react";
 
 // Sction item in Sidebar
 type SectionItem = {
@@ -21,7 +21,7 @@ type ProjectMetadata = {
 };
 // A project contains RF nodes and edges
 type ProjectBoard = {
-  nodes: VideoNodeT[];
+  nodes: Node[];
   edges: Edge[];
 };
 
@@ -38,7 +38,7 @@ type VideoContentMetadata = {
 };
 // Node info in DB
 // All Info for rendering a Video Node(appearance)
-type GraphNodeRow = {
+type VideoNodeMetadata = {
   projectMetadataId: string;
   videoContentMetadataId: VideoContentMetadata["id"];
   type: "videoNode";
@@ -50,18 +50,21 @@ type GraphNodeRow = {
   zIndex?: number;
   locked?: boolean;
 };
-// Video Node info for constructing a custom Node of VideoNodeT in reactflow
-type VideoNodeData = {
-  videoContentMetadataId: VideoContentMetadata["id"];
+
+type EdgeMetadata = {
+  id: string;
+  type: "plainEdge";
+  projectMetadataId: ProjectMetadata["id"];
+  source: VideoContentMetadata["id"];
+  target: VideoContentMetadata["id"];
 };
-// Custom Node type
-type VideoNodeT = Node<VideoNodeData, "videoNode">;
 
 // State
 type BoardState = {
   boards: Record<ProjectMetadata["id"], ProjectBoard>;
-  loadBoard: (projectId: string) => { nodes: VideoNodeT[]; edges: Edge[] };
-  upsertBoard: (projectId: string, nodes: VideoNodeT[], edges: Edge[]) => void;
+  getBoard: (projectId: ProjectMetadata["id"]) => ProjectBoard | undefined;
+  upsertBoard: (projectId: ProjectMetadata["id"], board: ProjectBoard) => void;
+  upsertProject: (projectId: ProjectMetadata["id"], patch: Partial<ProjectBoard>) => void;
 };
 
 // TODO: custom edge
@@ -71,8 +74,7 @@ export type {
   ProjectMetadata,
   ProjectBoard,
   BoardState,
-  VideoNodeT,
-  VideoNodeData,
   VideoContentMetadata,
-  GraphNodeRow,
+  VideoNodeMetadata,
+  EdgeMetadata,
 };

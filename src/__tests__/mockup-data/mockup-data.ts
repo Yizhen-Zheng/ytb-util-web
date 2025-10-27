@@ -160,10 +160,10 @@ const videoNodeMetadatas: VideoNodeMetadata[] = [
 
 const edgeMetadatas: EdgeMetadata[] = [
   // project_1
-  { id: "project_1_edge1", projectMetadataId: "project_1", source: "vid_1", target: "vid_2" },
+  { id: "project_1_edge1", projectMetadataId: "project_1", source: "vid_1", target: "vid_2", type: "plainEdge" },
   // project_2
-  { id: "project_2_edge1", projectMetadataId: "project_2", source: "vid_3", target: "vid_4" },
-  { id: "project_2_edge2", projectMetadataId: "project_2", source: "vid_3", target: "vid_5" },
+  { id: "project_2_edge1", projectMetadataId: "project_2", source: "vid_3", target: "vid_4", type: "plainEdge" },
+  { id: "project_2_edge2", projectMetadataId: "project_2", source: "vid_3", target: "vid_5", type: "plainEdge" },
 ];
 
 const boards: Record<ProjectMetadata["id"], ProjectBoard> = {

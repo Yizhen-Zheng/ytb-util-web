@@ -1,6 +1,7 @@
 // pages/NodeDetailsModal.tsx
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { useNavigate } from "react-router";
 
@@ -176,7 +177,7 @@ export default function NodeDetailsModal() {
       <div
         role="dialog"
         aria-modal
-        className="pointer-events-auto absolute left-0 top-0 border bg-yellow-100 text-slate-900"
+        className="pointer-events-auto absolute left-0 top-0 border bg-white text-slate-900"
         style={{
           transform: `translate(${position.x}px, ${position.y}px)`,
           width: `${dimensions.width}px`,
@@ -185,7 +186,7 @@ export default function NodeDetailsModal() {
       >
         <div
           onPointerDown={(event) => startInteraction(event, { mode: "drag" })}
-          className={`flex h-10 items-center justify-between border-b border-sky-500 bg-lime-200 px-3 ${
+          className={`flex h-10 items-center justify-between border-b  px-3 ${
             isInteracting ? "cursor-grabbing" : "cursor-grab"
           }`}
         >

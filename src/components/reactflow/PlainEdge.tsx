@@ -14,13 +14,23 @@ const PlainEdge = (props: EdgeProps<PlainEdge>) => {
     targetY,
     targetPosition,
   });
+  const { label, labelStyle, markerStart, markerEnd, interactionWidth } = props;
+
   const onEdgeClick = () => {
     console.log("edge clicked");
   };
   console.log(props);
   return (
     <>
-      <BaseEdge path={edgePath} onClick={onEdgeClick} />
+      <BaseEdge
+        path={edgePath}
+        label={label}
+        labelStyle={labelStyle}
+        markerEnd={markerEnd}
+        markerStart={markerStart}
+        interactionWidth={interactionWidth}
+        onClick={onEdgeClick}
+      />
       <EdgeLabelRenderer>
         <div>edge!</div>
       </EdgeLabelRenderer>
