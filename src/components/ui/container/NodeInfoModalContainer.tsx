@@ -191,13 +191,10 @@ export default function NodeInfoModalContainer({ title, onClose, children }: Nod
       >
         <CardHeader
           onPointerDown={(event) => startInteraction(event, { mode: "drag" })}
-          className={
-            `border-b py-3 ${isInteracting ? "cursor-grabbing" : "cursor-grab"}` +
-            "flex items-center justify-between space-x-2 px-6"
-          }
+          className={`py-4 ${isInteracting ? "cursor-grabbing" : "cursor-grab"}` + "flex items-center  px-4 h-12"}
         >
-          <div className="flex items-center justify-between space-x-2 top-0 bottom-0">
-            <CardTitle className="h-full top-0 bottom-0 text-sm font-semibold uppercase tracking-wide">
+          <div className="flex items-center justify-between  top-0 bottom-0 m-0">
+            <CardTitle className="h-full top-0 bottom-0 text-lg font-semibold items-center justify-center tracking-wide">
               {title}
             </CardTitle>
             <CardAction>
@@ -213,7 +210,7 @@ export default function NodeInfoModalContainer({ title, onClose, children }: Nod
             </CardAction>
           </div>
         </CardHeader>
-        <CardContent className="flex min-h-0 flex-1 flex-col gap-4 px-6 py-4">{children}</CardContent>
+        <CardContent className="flex min-h-0 flex-1 flex-col gap-4 px-4 py-4">{children}</CardContent>
         <button
           aria-label="Resize from top left"
           type="button"
