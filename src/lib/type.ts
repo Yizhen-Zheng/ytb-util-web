@@ -1,23 +1,21 @@
 import { type Node, type Edge } from "@xyflow/react";
 
 // Sction item in Sidebar
+// TODO: change highlightedNodes to react button elements(Button as Link)(so clicking button jumps to, e,g, projects page)
 type SectionItem = {
   id: string;
   title: string;
   defaultOpen: boolean;
-  items: Array<{
-    icon: string;
-    name: string;
-  }>;
 };
 
 // Project info in DB
 type ProjectMetadata = {
   id: string;
+  icon: string | null;
   title: string;
   thumbnail: string;
   description?: string;
-  tags?: string[];
+  tags: string[];
 };
 // A project contains RF nodes and edges
 type ProjectBoard = {
@@ -35,6 +33,7 @@ type VideoContentMetadata = {
   thumbnail: string;
   title: string;
   description?: string;
+  children: VideoContentMetadata[];
 };
 // Node info in DB
 // All Info for rendering a Video Node(appearance)
@@ -43,29 +42,16 @@ type VideoNodeMetadata = {
   projectMetadataId: string;
   videoContentMetadataId: VideoContentMetadata["id"];
   type: "videoNode";
-  color?: string;
   x: number;
   y: number;
-  width?: number;
-  height?: number;
-  zIndex?: number;
-  locked?: boolean;
 };
 
 type EdgeMetadata = {
   id: string;
   type: "plainEdge";
   projectMetadataId: ProjectMetadata["id"];
-  source: NodeHandleMetadata["id"];
-  target: NodeHandleMetadata["id"];
-};
-
-type NodeHandleMetadata = {
-  id: string;
-  type: "source" | "target";
-  position: "Left" | "Right" | "Top" | "Bottom";
-  projectMetadataId: ProjectMetadata["id"];
-  videoNodeMetadataId: VideoNodeMetadata["id"];
+  sourceNodeId: VideoNodeMetadata["id"];
+  targetNodeId: VideoNodeMetadata["id"];
 };
 
 // State(currently not using)
@@ -86,5 +72,5 @@ export type {
   VideoContentMetadata,
   VideoNodeMetadata,
   EdgeMetadata,
-  NodeHandleMetadata,
+  // NodeHandleMetadata,
 };

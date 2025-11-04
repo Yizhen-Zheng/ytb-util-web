@@ -12,14 +12,11 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { getAllProjectsOfUser, getSectionShortcuts } from "@/lib/db/project";
+import { getAllProjectsOfUser } from "@/lib/db/project";
 import { sidebarHeader, sidebarContent, sidebarFooter } from "@/lib/sidebar-content";
 import { Ellipsis, FolderGit2, Star } from "lucide-react";
-
-type SectionShortcut = SectionItem["items"][number];
-
+import ProjectBtn from "./buttons/sidebar/ProjectBtn";
 const MOCK_USER_ID = "mock-user";
 /*
 NOTE:
@@ -29,9 +26,7 @@ So that we dont need another top navigation
 Benifit from projects are not nested, so we dont have layers to go back and forward
 */
 export default function AppSidebar() {
-  const userInfo = sidebarHeader[0];
   const [projects, setProjects] = useState<ProjectMetadata[]>([]);
-  const [favoriteShortcuts, setFavoriteShortcuts] = useState<SectionShortcut[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -39,17 +34,13 @@ export default function AppSidebar() {
 
     const loadSidebarData = async () => {
       try {
-        const [projectItems, favorites] = await Promise.all([
-          getAllProjectsOfUser(MOCK_USER_ID),
-          getSectionShortcuts(MOCK_USER_ID, "favorites"),
-        ]);
+        const [projectItems] = await Promise.all([getAllProjectsOfUser(MOCK_USER_ID)]);
 
         if (!isMounted) {
           return;
         }
 
         setProjects(projectItems);
-        setFavoriteShortcuts(favorites);
       } finally {
         if (isMounted) {
           setIsLoading(false);
@@ -58,24 +49,12 @@ export default function AppSidebar() {
     };
 
     loadSidebarData();
-
     return () => {
       isMounted = false;
     };
   }, []);
 
   const hasProjects = projects.length > 0;
-  const hasFavorites = favoriteShortcuts.length > 0;
-
-  const favoriteItems = useMemo(
-    () =>
-      favoriteShortcuts.map((item) => ({
-        key: `${item.icon}-${item.name}`,
-        icon: item.icon,
-        label: item.name,
-      })),
-    [favoriteShortcuts]
-  );
 
   return (
     <Sidebar collapsible="icon" variant="sidebar">
@@ -126,12 +105,7 @@ export default function AppSidebar() {
                 </SidebarMenuItem>
               )}
               {projects.map((project) => (
-                <SidebarMenuItem key={project.id}>
-                  <SidebarMenuButton>
-                    <FolderGit2 className="size-4" />
-                    <span className="truncate">{project.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <ProjectBtn key={project.id} id={project.id} title={project.title} icon={project.icon} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
@@ -153,7 +127,7 @@ export default function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
-              {!isLoading && !hasFavorites && (
+              {!isLoading && (
                 <SidebarMenuItem>
                   <SidebarMenuButton disabled>
                     <Star className="size-4" />
@@ -161,16 +135,6 @@ export default function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )}
-              {favoriteItems.map((item) => (
-                <SidebarMenuItem key={item.key}>
-                  <SidebarMenuButton>
-                    <span aria-hidden="true" className="text-base">
-                      {item.icon}
-                    </span>
-                    <span className="truncate">{item.label}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

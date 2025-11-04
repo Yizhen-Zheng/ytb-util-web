@@ -13,39 +13,30 @@ const sections: SectionItem[] = [
     id: "favorites",
     title: "Favorites",
     defaultOpen: true,
-    items: [
-      { icon: "📚", name: "Coding Library" },
-      { icon: "🔢", name: "Algorithms Library" },
-      { icon: "📖", name: "Books" },
-    ],
   },
   {
     id: "projects",
     title: "Projects",
     defaultOpen: true,
-    items: [
-      { icon: "💾", name: "Data Structure" },
-      { icon: "📓", name: "Prarallel computing" },
-      { icon: "✅", name: "Boilogy" },
-      { icon: "💼", name: "Hardware" },
-    ],
   },
 ];
 
 const projects: ProjectMetadata[] = [
   {
     id: "project_1",
-    title: "NeuralNetwork",
+    icon: "🎨",
+    title: "Figma Advanced Tutorial II - Prototyping with Design Systems",
     thumbnail: "https://placehold.co/240x140",
-    tags: ["Deep Learning", "AI", "Machine Learning"],
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    tags: ["Design", "UI", "Graphic"],
+    description: "How to prototype with Figma effectively with design systems.",
   },
   {
     id: "project_2",
-    title: "Web Development",
+    icon: "✍️",
+    title: "Creative Thinking for Designers",
     thumbnail: "https://placehold.co/240x140/eee/333?text=Thumbnail",
-    tags: ["Design", "Frontend", "UI"],
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    tags: ["Design", "Research"],
+    description: "Learn how to solve problems with creative thinking.",
   },
 ];
 const videoContentMetadatas: VideoContentMetadata[] = [
@@ -59,6 +50,7 @@ const videoContentMetadatas: VideoContentMetadata[] = [
     thumbnail: "https://img.youtube.com/vi/aircAruvnKk/hqdefault.jpg",
     title: "Neural Networks Demystified - Part 1",
     description: "A visual introduction to neural networks and how they learn.",
+    children: [],
   },
   {
     id: "vid_2",
@@ -68,6 +60,7 @@ const videoContentMetadatas: VideoContentMetadata[] = [
     thumbnail: "https://img.youtube.com/vi/7eh4d6sabA0/hqdefault.jpg",
     title: "Machine Learning for Beginners - Full Course",
     description: "FreeCodeCamp crash course to start learning ML in Python.",
+    children: [],
   },
 
   // project_2
@@ -80,6 +73,7 @@ const videoContentMetadatas: VideoContentMetadata[] = [
     thumbnail: "https://img.youtube.com/vi/LHBE6Q9XlzI/hqdefault.jpg",
     title: "React Explained in 100 Seconds",
     description: "A concise visual explanation of React fundamentals.",
+    children: [],
   },
   {
     id: "vid_4",
@@ -89,6 +83,7 @@ const videoContentMetadatas: VideoContentMetadata[] = [
     thumbnail: "https://img.youtube.com/vi/Ke90Tje7VS0/hqdefault.jpg",
     title: "React JS Crash Course",
     description: "Traversy Media crash course for React beginners.",
+    children: [],
   },
   {
     id: "vid_5",
@@ -98,6 +93,7 @@ const videoContentMetadatas: VideoContentMetadata[] = [
     thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/hqdefault.jpg",
     title: "Learn Python in One Video",
     description: "Quick overview of Python basics for complete beginners.",
+    children: [],
   },
 ];
 
@@ -171,3 +167,72 @@ const boards: Record<ProjectMetadata["id"], ProjectBoard> = {
   },
 };
 export { sections, projects, boards, videoNodeMetadatas, videoContentMetadatas, edgeMetadatas };
+
+// import type { RoadItem } from "./type-roadmap";
+// import type { TimestampItem } from "@/lib/type";
+// // layout constants
+// const X_OFFSET = 64;
+// const Y_OFFSET = 108;
+
+// // --------------- mockup data ----------------
+
+// const roadmap: RoadItem[] = [
+//   {
+//     id: "root",
+//     title: "Intro to Figma & UI Design",
+//     done: false,
+//     collapsed: false,
+//     childrenId: ["a", "b", "c"],
+//     depth: 0,
+//   },
+//   {
+//     id: "a",
+//     title: "Getting Started with Figma",
+//     done: true,
+//     collapsed: false,
+//     childrenId: ["a1", "a2"],
+//     depth: 1,
+//   },
+//   { id: "a1", title: "Figma Interface Basics", done: true, collapsed: true, childrenId: [], depth: 2 },
+//   { id: "a2", title: "Frames, Layers, and Groups", done: true, collapsed: true, childrenId: [], depth: 2 },
+//   {
+//     id: "b",
+//     title: "Core UI Design Skills",
+//     done: false,
+//     collapsed: false,
+//     childrenId: ["b1", "b2", "b3"],
+//     depth: 1,
+//   },
+//   { id: "b1", title: "Typography & Color Systems", done: true, collapsed: true, childrenId: [], depth: 2 },
+//   { id: "b2", title: "Auto Layout & Constraints", done: true, collapsed: true, childrenId: [], depth: 2 },
+//   { id: "b3", title: "Components & Variants", done: true, collapsed: true, childrenId: [], depth: 2 },
+//   {
+//     id: "c",
+//     title: "Prototyping & Collaboration",
+//     done: false,
+//     collapsed: false,
+//     childrenId: ["c1", "c2"],
+//     depth: 1,
+//   },
+//   { id: "c1", title: "Interactive Prototypes", done: false, collapsed: true, childrenId: [], depth: 2 },
+//   { id: "c2", title: "Design Systems & Handoff", done: false, collapsed: true, childrenId: [], depth: 2 },
+// ];
+
+// const mockTimestamps: TimestampItem[] = [
+//   {
+//     id: "t1",
+//     title: "Data Warehousing: An Enduring Concept for Analytical Insights",
+//     time: "0:39",
+//   },
+//   {
+//     id: "t2",
+//     title: "Power BI Developers: The Bridge Between Business and Technology",
+//     time: "1:10",
+//   },
+//   {
+//     id: "t3",
+//     title: "Inmon's Centralized Enterprise Data Warehouse Approach",
+//     time: "1:13",
+//   },
+// ];
+// export { roadmap, X_OFFSET, Y_OFFSET, mockTimestamps };

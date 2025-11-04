@@ -13,7 +13,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getVideoContentMetadataById } from "@/lib/db/node";
 import type { VideoContentMetadata, VideoNodeMetadata } from "@/lib/type";
 
-export type VideoNode = Node<{ metadata: VideoNodeMetadata }, "videoNode">;
+export type VideoNode = Node<VideoNodeMetadata, "videoNode">;
 
 // TODO: use cached data instead of fetching every time
 // (handle cache outside of the component if possible, or use State)
@@ -21,7 +21,7 @@ const VideoNode = (props: NodeProps<VideoNode>) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const location = useLocation(); // load content seperate from RF ui
-  const { metadata } = props.data;
+  const metadata = props.data;
   const [videoContentMetadata, setVideoContentMetadata] = useState<VideoContentMetadata>();
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +48,7 @@ const VideoNode = (props: NodeProps<VideoNode>) => {
             <BaseHandle position={Position.Bottom} type="target" />
           </BaseNodeContent>
 
-          <BaseNodeHeader className="p-3">
+          <BaseNodeHeader className="p-4">
             <BaseNodeHeaderTitle className="text-sm font-medium line-clamp-2">
               <span>Loading...</span>
             </BaseNodeHeaderTitle>

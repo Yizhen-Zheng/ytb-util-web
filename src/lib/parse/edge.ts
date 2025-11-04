@@ -7,7 +7,7 @@ const edgeMetadataToEdge = (row: EdgeMetadata): Edge => {
     source: row.sourceNodeId,
     target: row.targetNodeId,
     type: row.type,
-    data: { metadata: row },
+    data: row,
   };
 };
 

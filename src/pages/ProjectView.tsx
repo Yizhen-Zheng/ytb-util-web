@@ -1,6 +1,5 @@
-import { Outlet, useParams, useLocation, Link } from "react-router";
-import { useBoardStore } from "@/hooks/use-board-store";
-import React, { useCallback, useRef, useState, useEffect, use } from "react";
+import { Outlet, useParams } from "react-router";
+import { useCallback, useState, useEffect } from "react";
 import { ReactFlow, addEdge, MiniMap, Controls, Background, useNodesState, useEdgesState } from "@xyflow/react";
 import type { NodeChange, EdgeChange, Connection, Node, Edge } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
@@ -93,7 +92,7 @@ export default function ProjectView() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        fitView
+        fitView={true}
       >
         <Background />
         <MiniMap />

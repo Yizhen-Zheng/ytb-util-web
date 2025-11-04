@@ -6,7 +6,7 @@ const videoNodeMetadataToVideoNode = (row: VideoNodeMetadata): VideoNode => {
     id: row.id,
     type: row.type,
     position: { x: row.x, y: row.y } as XYPosition,
-    data: { metadata: row }, //handle info(change props in VideoNode.tsx)
+    data: row, //handle info(change props in VideoNode.tsx)
   };
   return vn;
 };

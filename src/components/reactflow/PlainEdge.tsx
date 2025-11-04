@@ -10,7 +10,7 @@ import {
 } from "@xyflow/react";
 import type { EdgeMetadata } from "@/lib/type";
 
-export type PlainEdge = Edge<{ edgeMetadata: EdgeMetadata }>;
+export type PlainEdge = Edge<EdgeMetadata, "plainEdge">;
 
 const PlainEdge = (props: EdgeProps<PlainEdge>) => {
   const { sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition } = props;
@@ -34,16 +34,6 @@ const PlainEdge = (props: EdgeProps<PlainEdge>) => {
         markerStart={markerStart}
         interactionWidth={interactionWidth}
       />
-      {/* <EdgeLabelRenderer>
-        <div
-          style={{
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-          }}
-          className="edge-label-renderer__custom-edge nodrag nopan bg-amber-500"
-        >
-          edge
-        </div>
-      </EdgeLabelRenderer> */}
       <EdgeText x={labelX} y={labelY} label={"Fundation"} />
     </>
   );
